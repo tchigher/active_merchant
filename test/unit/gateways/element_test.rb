@@ -147,7 +147,7 @@ class ElementTest < Test::Unit::TestCase
   def test_successful_purchase_with_card_present_code
     response = stub_comms do
       @gateway.purchase(@amount, @credit_card, @options.merge(card_present_code: 'Present'))
-    end.check_request do |endpoint, data, headers|
+    end.check_request do |_endpoint, data, _headers|
       assert_match '<CardPresentCode>Present</CardPresentCode>', data
     end.respond_with(successful_purchase_response)
 
@@ -157,7 +157,7 @@ class ElementTest < Test::Unit::TestCase
   def test_successful_purchase_with_terminal_id
     response = stub_comms do
       @gateway.purchase(@amount, @credit_card, @options.merge(terminal_id: '02'))
-    end.check_request do |endpoint, data, headers|
+    end.check_request do |_endpoint, data, _headers|
       assert_match '<TerminalID>02</TerminalID>', data
     end.respond_with(successful_purchase_response)
 
